@@ -1,0 +1,146 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Sign Up for Innotm</h2>
+      <p>Create your digital wallet account</p>
+    </div>
+    <form (ngSubmit)="onSubmit()" #signupForm="ngForm" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="user.email"
+          class="form-control"
+          placeholder="Enter your email"
+          required
+          email
+          #email="ngModel"
+        />
+        <div
+          class="error"
+          style="color: red"
+          *ngIf="email.invalid && email.touched"
+        >
+          Valid email is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number *</label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          name="phoneNumber"
+          [(ngModel)]="user.phoneNumber"
+          class="form-control"
+          placeholder="Enter your phone number"
+          required
+          pattern="^[0-9]{10,15}$"
+          #phoneNumber="ngModel"
+        />
+        <div
+          style="color: red"
+          class="error"
+          *ngIf="phoneNumber.invalid && phoneNumber.touched"
+        >
+          Valid phone number is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username">Username *</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="user.username"
+          class="form-control"
+          placeholder="Choose a username"
+          required
+          minlength="3"
+          #username="ngModel"
+        />
+        <div
+          class="error"
+          style="color: red"
+          *ngIf="username.invalid && username.touched"
+        >
+          Username (min 3 chars) is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Gender *</label>
+        <div class="gender-options">
+          <label class="radio-option">
+            <input
+              type="radio"
+              name="gender"
+              [(ngModel)]="user.gender"
+              value="male"
+              required
+              #gender="ngModel"
+            />
+            <span class="radio-custom"></span>
+            <span>Male</span>
+          </label>
+          <label class="radio-option">
+            <input
+              type="radio"
+              name="gender"
+              [(ngModel)]="user.gender"
+              value="female"
+              required
+            />
+            <span class="radio-custom"></span>
+            <span>Female</span>
+          </label>
+          <label class="radio-option">
+            <input
+              type="radio"
+              name="gender"
+              [(ngModel)]="user.gender"
+              value="other"
+              required
+            />
+            <span class="radio-custom"></span>
+            <span>Other</span>
+          </label>
+        </div>
+        <div class="error" *ngIf="gender.invalid && gender.touched">
+          Please select a gender.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="user.password"
+          class="form-control"
+          placeholder="Create a password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div
+          class="error"
+          style="color: red"
+          *ngIf="password.invalid && password.touched"
+        >
+          Password (min 6 chars) is required.
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="signupForm.invalid">
+        <span *ngIf="!isLoading">Register</span>
+        <span *ngIf="isLoading">Creating Account...</span>
+      </button>
+    </form>
+    <div class="auth-footer">
+      <p>
+        Already have an account?
+        <a (click)="goToLogin()" class="auth-link">Login here</a>
+      </p>
+    </div>
+  </div>
+</div>
