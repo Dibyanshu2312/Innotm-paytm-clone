@@ -1,0 +1,92 @@
+<!-- Bootstrap 5 CDN -->
+<div class="container-fluid">
+  <div class="row vh-100">
+    <!-- Sidebar -->
+    <button
+      class="btn btn-dark d-md-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#sidebar"
+      aria-expanded="false"
+      aria-controls="sidebar"
+    >
+      <i class="bi bi-list icon-style"></i> Menu
+    </button>
+    <nav id="sidebar" class="col-md-2 collapse d-md-block bg-dark sidebar py-4">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white active" routerLink="/dashboard">
+              <i class="bi bi-speedometer2 icon-style"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white">
+              <i class="bi bi-wallet2 icon-style"></i>
+              Wallet
+            </a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white">
+              <i class="bi bi-credit-card icon-style"></i>
+              Transactions
+            </a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white">
+              <i class="bi bi-person icon-style"></i>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item mt-5">
+            <a class="nav-link text-danger" routerLink="/login">
+              <i class="bi bi-box-arrow-right icon-style"></i>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="col-md-10 ms-sm-auto px-md-4 py-4">
+      <main>
+        <h2>Welcome to Your Dashboard</h2>
+        <div class="row my-4">
+          <div class="col-md-4">
+            <div class="card text-bg-primary mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Balance</h5>
+                <p class="card-text fs-4">₹10,000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-bg-success mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Recent Transactions</h5>
+                <p class="card-text">View your latest activity</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-bg-warning mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Offers</h5>
+                <p class="card-text">Check out new offers!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add more dashboard content here -->
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Icons CDN -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+/>

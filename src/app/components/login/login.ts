@@ -38,6 +38,7 @@ export class Login {
 
       if (user) {
         alert('Login successful!');
+        this.router.navigate(['/dashboard']);
         // You can store login state here if needed
         // localStorage.setItem('currentUser', JSON.stringify(user));
         // Navigate to dashboard or home
