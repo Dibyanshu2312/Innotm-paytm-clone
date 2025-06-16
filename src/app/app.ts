@@ -6,7 +6,14 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, RouterModule],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    Login,
+    Signup,
+    RouterLink,
+    RouterModule,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
