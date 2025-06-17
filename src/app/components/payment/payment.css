@@ -1,0 +1,111 @@
+/* Simple Money Transfer Form Styles */
+.card-body {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 400px;
+  margin: 1rem auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin-bottom: 1.5rem !important;
+}
+
+.select-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  background: white;
+  font-size: 1rem;
+  color: #495057;
+  transition: border-color 0.3s ease;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.custom-select:hover {
+  border-color: #adb5bd;
+}
+
+.input-group-text {
+  background: #e9ecef;
+  border: 2px solid #ced4da;
+  color: #495057;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+}
+
+.input-group-text:first-child {
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+.input-group-text:last-child {
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+}
+
+.form-control {
+  border: 2px solid #ced4da;
+  border-left: none;
+  border-right: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: none;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+  border-color: #007bff;
+}
+
+.btn-primary {
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+}
+
+.btn-primary:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .card-body {
+    margin: 0.5rem;
+    padding: 1.5rem;
+  }
+}

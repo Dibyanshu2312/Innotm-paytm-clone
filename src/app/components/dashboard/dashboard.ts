@@ -1,0 +1,42 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Myservice } from '../../services/myservice';
+
+@Component({
+  selector: 'app-dashboard',
+  imports: [],
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css',
+})
+export class Dashboard implements OnInit {
+  constructor(private router: Router, private myservice: Myservice) {}
+  balance: number = 0;
+
+  ngOnInit() {
+    const phoneNumber = sessionStorage.getItem('number');
+    if (phoneNumber) {
+      this.myservice.Balanceinfo(phoneNumber).subscribe((data) => {
+        this.balance = data.result.amount; // Correctly extract amount from result
+      });
+    }
+  }
+
+  addMoney() {
+    this.router.navigate(['/addmoney']);
+  }
+
+  transferMoney() {
+    this.router.navigate(['/payment']);
+  }
+  viewTransactionHistory() {
+    this.router.navigate(['/transactionhistory']);
+  }
+  logout() {
+    this.router.navigate(['/login']);
+  }
+  isSidebarVisible = false;
+
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
+  }
+}

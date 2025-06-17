@@ -5,13 +5,13 @@
       <p>Sign in to your Innotm account</p>
     </div>
 
-    <form (ngSubmit)="onSubmit()" class="auth-form">
+    <form (ngSubmit)="Onsubmit()" class="auth-form">
       <div class="form-group">
         <label for="phoneNumber">Phone Number *</label>
         <input
           type="tel"
           id="phoneNumber"
-          [(ngModel)]="phoneNumber"
+          [(ngModel)]="loginModel.phoneNumber"
           name="phoneNumber"
           class="form-control"
           placeholder="Enter your phone number"
@@ -24,7 +24,7 @@
           <input
             [type]="showPassword ? 'text' : 'password'"
             id="password"
-            [(ngModel)]="password"
+            [(ngModel)]="loginModel.password"
             name="password"
             class="form-control"
             placeholder="Enter your password"

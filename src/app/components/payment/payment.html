@@ -1,0 +1,35 @@
+<div class="card-body">
+  <div class="input-group mb-3">
+    <label for="users" class="select-label"> Select User</label>
+    <select
+      id="users"
+      class="custom-select"
+      [(ngModel)]="transferMoneyModel.receiverPhoneNumber"
+    >
+      <option value="" disabled selected>Select users</option>
+      <option *ngFor="let user of userlist" [value]="user.phoneNumber">
+        {{user.username}} | {{user.phoneNumber}}
+      </option>
+    </select>
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">Amount</span>
+    <input
+      type="number"
+      class="form-control"
+      [(ngModel)]="transferMoneyModel.amount"
+      min="1"
+      aria-label="Amount (to the nearest INR)"
+      required
+    />
+    <span class="input-group-text">.00</span>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="sendMoney()"
+    [disabled]="!transferMoneyModel.receiverPhoneNumber ||!transferMoneyModel.amount"
+  >
+    Send Money
+  </button>
+</div>

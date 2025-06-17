@@ -1,0 +1,198 @@
+<div class="container mt-5">
+  <div class="card p-4 shadow">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="text-primary mb-0">
+        <i class="fas fa-history"></i>
+        {{ showAllTransactions ? 'All Transactions' : 'Recent Transactions (30
+        days)' }}
+      </h3>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary btn-sm" (click)="toggleView()">
+          <i
+            class="fas"
+            [class.fa-calendar-day]="showAllTransactions"
+            [class.fa-calendar]="!showAllTransactions"
+          ></i>
+          {{ showAllTransactions ? 'Show Recent' : 'Show All' }}
+        </button>
+        <button
+          class="btn btn-outline-primary btn-sm"
+          (click)="getTransactions()"
+        >
+          <i class="fas fa-refresh"></i> Refresh
+        </button>
+        <button class="btn btn-outline-success btn-sm">
+          <i class="fas fa-download"></i> Export
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4" *ngIf="getDisplayTransactions().length > 0">
+      <div class="col-md-4">
+        <div class="card bg-success text-white">
+          <div class="card-body text-center">
+            <h5><i class="fas fa-arrow-up"></i> Total Received</h5>
+            <h4>₹{{ getTotalReceived() | number:'1.2-2' }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-danger text-white">
+          <div class="card-body text-center">
+            <h5><i class="fas fa-arrow-down"></i> Total Sent</h5>
+            <h4>₹{{ getTotalSent() | number:'1.2-2' }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-primary text-white">
+          <div class="card-body text-center">
+            <h5><i class="fas fa-receipt"></i> Total Transactions</h5>
+            <h4>{{ getDisplayTransactions().length }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction Table -->
+    <div
+      class="table-responsive"
+      *ngIf="getDisplayTransactions().length > 0; else noData"
+    >
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Transaction ID</th>
+            <th>Date & Time</th>
+            <th>Type</th>
+            <th>Amount (₹)</th>
+            <th>Balance After</th>
+            <th>To/From</th>
+            <th>Phone Number</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let txn of getDisplayTransactions(); let i = index"
+            [class.table-success]="txn.transactionType === 'credit'"
+            [class.table-danger]="txn.transactionType === 'debit'"
+          >
+            <td class="fw-bold">{{ i + 1 }}</td>
+
+            <!-- Transaction ID -->
+            <td>
+              <small class="text-muted"
+                >#{{ txn.transactionId || 'N/A' }}</small
+              >
+            </td>
+
+            <!-- Date & Time -->
+            <td>
+              <div>
+                <strong>{{ txn.transactionDate | date:'dd MMM yyyy' }}</strong>
+              </div>
+              <small class="text-muted"
+                >{{ txn.transactionDate | date:'hh:mm a' }}</small
+              >
+            </td>
+
+            <!-- Transaction Type -->
+            <td class="text-center">
+              <span
+                class="badge"
+                [class.bg-success]="txn.transactionType === 'credit'"
+                [class.bg-danger]="txn.transactionType === 'debit'"
+              >
+                <i
+                  class="fas"
+                  [class.fa-arrow-down]="txn.transactionType === 'credit'"
+                  [class.fa-arrow-up]="txn.transactionType === 'debit'"
+                ></i>
+                {{ txn.transactionType === 'credit' ? 'Received' : 'Sent' }}
+              </span>
+            </td>
+
+            <!-- Amount -->
+            <td class="text-end">
+              <span
+                class="fw-bold fs-5"
+                [class.text-success]="txn.transactionType === 'credit'"
+                [class.text-danger]="txn.transactionType === 'debit'"
+              >
+                {{ txn.transactionType === 'credit' ? '+' : '-' }}₹{{
+                txn.transferAmount | number:'1.2-2' }}
+              </span>
+            </td>
+
+            <!-- Balance After Transaction -->
+            <td class="text-end">
+              <span class="text-muted"
+                >₹{{ txn.initialAmount | number:'1.2-2' }}</span
+              >
+            </td>
+
+            <!-- To/From Name -->
+            <td>
+              <div class="d-flex align-items-center">
+                <div
+                  class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                  style="width: 35px; height: 35px"
+                >
+                  <i class="fas fa-user"></i>
+                </div>
+                <div>
+                  <strong>{{ txn.receiverName || 'Unknown' }}</strong>
+                  <br />
+                  <small class="text-muted"
+                    >{{ txn.transactionType === 'credit' ? 'From' : 'To'
+                    }}</small
+                  >
+                </div>
+              </div>
+            </td>
+
+            <!-- Phone Number -->
+            <td>
+              <span class="badge bg-light text-dark">
+                <i class="fas fa-phone"></i> {{ txn.receiverPhoneNumber || 'N/A'
+                }}
+              </span>
+            </td>
+
+            <!-- Status -->
+            <td class="text-center">
+              <span class="badge bg-success">
+                <i class="fas fa-check-circle"></i> Completed
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- No Data Template -->
+    <ng-template #noData>
+      <div class="text-center py-5">
+        <div class="mb-4">
+          <i class="fas fa-receipt fa-4x text-muted"></i>
+        </div>
+        <h4 class="text-muted">No Transactions Found</h4>
+        <p class="text-muted">
+          Your transaction history will appear here once you make some
+          transactions.
+        </p>
+        <div class="mt-4">
+          <button class="btn btn-primary me-2" routerLink="/transfer">
+            <i class="fas fa-paper-plane"></i> Send Money
+          </button>
+          <button class="btn btn-success" routerLink="/add-money">
+            <i class="fas fa-plus"></i> Add Money
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
