@@ -59,4 +59,7 @@ export class Payment implements OnInit {
   toggleSidebar() {
     this.isSidebarVisible = !this.isSidebarVisible;
   }
+  goHome() {
+    this.router.navigate(['/dashboard']);
+  }
 }
