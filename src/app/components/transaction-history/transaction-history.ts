@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Myservice,
-  transactionhistoryModel,
-  transferMoneyModel,
-} from '../../services/myservice';
+import { Myservice } from '../../services/myservice';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-history',
@@ -13,95 +10,102 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './transaction-history.html',
   styleUrl: './transaction-history.css',
 })
-export class TransactionHistory {
-  transactions: any[] = []; // All transactions from API
-  recentTransactions: any[] = []; // Filtered recent transactions
-  showAllTransactions: boolean = false; // Toggle between recent and all
+export class TransactionHistory implements OnInit {
+  transactions: any[] = [];
+  username: string = '';
 
-  constructor(private myservice: Myservice) {}
+  constructor(private myservice: Myservice, private router: Router) {}
 
   ngOnInit() {
+    this.username = sessionStorage.getItem('number') || '';
+    console.log('Phone number from session:', this.username);
     this.getTransactions();
   }
 
   getTransactions() {
-    // Create empty model object to pass to service
-    const requestData = new transactionhistoryModel();
+    if (!this.username) {
+      console.error('No phone number found in session');
+      alert('Please login again');
+      return;
+    }
 
-    this.myservice.gettransactionhistory(requestData).subscribe({
+    console.log('Getting transactions for phone:', this.username);
+    this.myservice.gettransactionhistory(this.username).subscribe({
       next: (data: any) => {
         console.log('API Response:', data);
 
-        // If API returns array directly
         if (Array.isArray(data)) {
           this.transactions = data;
-        }
-        // If API returns object with result property
-        else if (data && data.result) {
+        } else if (data && data.result && Array.isArray(data.result)) {
           this.transactions = data.result;
-        }
-        // If API returns single object, put it in array
-        else if (data) {
+        } else if (data && data.data && Array.isArray(data.data)) {
+          this.transactions = data.data;
+        } else if (data) {
           this.transactions = [data];
+        } else {
+          this.transactions = [];
         }
 
-        // Filter to show only recent transactions (last 30 days)
-        this.filterRecentTransactions();
+        console.log('Processed transactions:', this.transactions);
       },
       error: (error: any) => {
-        console.error('API Error:', error);
-        alert('Error loading transactions. Check console for details.');
+        console.error('Error loading transactions:', error);
+        alert('Failed to load transactions. Check console for details.');
       },
     });
   }
 
-  // Calculate total money received
-  getTotalReceived(): number {
-    const transactionsToUse = this.showAllTransactions
-      ? this.transactions
-      : this.recentTransactions;
-    return transactionsToUse
-      .filter((txn) => txn.transactionType === 'credit')
-      .reduce((total, txn) => total + (txn.transferAmount || 0), 0);
+  deleteTransaction(transactionId: number) {
+    if (confirm('Are you sure you want to delete this transaction?')) {
+      this.myservice.deleteTransactionById(transactionId).subscribe({
+        next: (response: any) => {
+          console.log('Delete response:', response);
+          alert('Transaction deleted successfully');
+          this.getTransactions();
+        },
+        error: (error: any) => {
+          console.error('Delete error:', error);
+          alert('Failed to delete transaction');
+        },
+      });
+    }
   }
 
-  // Calculate total money sent
-  getTotalSent(): number {
-    const transactionsToUse = this.showAllTransactions
-      ? this.transactions
-      : this.recentTransactions;
-    return transactionsToUse
-      .filter((txn) => txn.transactionType === 'debit')
-      .reduce((total, txn) => total + (txn.transferAmount || 0), 0);
+  deleteAllTransactions() {
+    if (
+      confirm(
+        'Are you sure you want to delete ALL transactions? This cannot be undone!'
+      )
+    ) {
+      this.myservice.deleteAllTransactions(this.username).subscribe({
+        next: (response: any) => {
+          console.log('Delete all response:', response);
+          alert('All transactions deleted successfully');
+          this.getTransactions();
+        },
+        error: (error: any) => {
+          console.error('Delete all error:', error);
+          alert('Failed to delete all transactions');
+        },
+      });
+    }
+  }
+  addMoney1() {
+    this.router.navigate(['/addmoney']);
   }
 
-  // Filter transactions to show only last 30 days
-  filterRecentTransactions(): void {
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-    this.recentTransactions = this.transactions.filter((txn) => {
-      const transactionDate = new Date(txn.transactionDate);
-      return transactionDate >= thirtyDaysAgo;
-    });
-
-    // Sort by date (newest first)
-    this.recentTransactions.sort(
-      (a, b) =>
-        new Date(b.transactionDate).getTime() -
-        new Date(a.transactionDate).getTime()
-    );
+  transferMoney() {
+    this.router.navigate(['/payment']);
   }
-
-  // Get transactions to display based on toggle
-  getDisplayTransactions(): any[] {
-    return this.showAllTransactions
-      ? this.transactions
-      : this.recentTransactions;
+  viewTransactionHistory() {
+    this.router.navigate(['/transactionhistory']);
   }
+  logout() {
+    this.router.navigate(['/login']);
+  }
+  isSidebarVisible = false;
 
-  // Toggle between recent and all transactions
-  toggleView(): void {
-    this.showAllTransactions = !this.showAllTransactions;
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 }

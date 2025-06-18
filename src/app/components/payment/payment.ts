@@ -6,6 +6,7 @@ import {
 } from '../../services/myservice';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 export class Payment implements OnInit {
   userPhonenumber: any;
 
-  constructor(private myservice: Myservice) {}
+  constructor(private myservice: Myservice, private router: Router) {}
 
   transferMoneyModel = new transferMoneyModel();
   userDetails = new userlistResponse();
@@ -39,5 +40,23 @@ export class Payment implements OnInit {
       console.log(data.response);
       alert(data.response);
     });
+  }
+  addMoney1() {
+    this.router.navigate(['/addmoney']);
+  }
+
+  transferMoney() {
+    this.router.navigate(['/payment']);
+  }
+  viewTransactionHistory() {
+    this.router.navigate(['/transactionhistory']);
+  }
+  logout() {
+    this.router.navigate(['/login']);
+  }
+  isSidebarVisible = false;
+
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 }

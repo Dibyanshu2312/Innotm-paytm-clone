@@ -42,10 +42,23 @@ export class Myservice {
       transferMoney
     );
   }
+  gettransactionhistory(phoneNumber: string) {
+    return this.http.get<any>(
+      this.masterapiurl + `/api/Transactions/history?phoneNumber=${phoneNumber}`
+    );
+  }
 
-  gettransactionhistory(transactionhist: transactionhistoryModel) {
-    return this.http.get<transactionhistoryModel>(
-      this.masterapiurl + '/api/Transactions/history'
+  deleteTransactionById(transactionId: number): Observable<any> {
+    return this.http.delete<any>(
+      this.masterapiurl +
+        '/api/Transactions/DeleteTransectionById?tid=' +
+        transactionId
+    );
+  }
+
+  deleteAllTransactions(phoneNumber: string): Observable<any> {
+    return this.http.delete<any>(
+      this.masterapiurl + '/api/Transactions/history?phoneNumber=' + phoneNumber
     );
   }
 }

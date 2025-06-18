@@ -1,35 +1,75 @@
-<div class="card-body">
-  <div class="input-group mb-3">
-    <label for="users" class="select-label"> Select User</label>
-    <select
-      id="users"
-      class="custom-select"
-      [(ngModel)]="transferMoneyModel.receiverPhoneNumber"
-    >
-      <option value="" disabled selected>Select users</option>
-      <option *ngFor="let user of userlist" [value]="user.phoneNumber">
-        {{user.username}} | {{user.phoneNumber}}
-      </option>
-    </select>
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text">Amount</span>
-    <input
-      type="number"
-      class="form-control"
-      [(ngModel)]="transferMoneyModel.amount"
-      min="1"
-      aria-label="Amount (to the nearest INR)"
-      required
-    />
-    <span class="input-group-text">.00</span>
-  </div>
-  <button
-    type="submit"
-    class="btn btn-primary"
-    (click)="sendMoney()"
-    [disabled]="!transferMoneyModel.receiverPhoneNumber ||!transferMoneyModel.amount"
+<button class="sidebar-toggle d-md-none" (click)="toggleSidebar()">☰</button>
+
+<!-- Wrapper -->
+<div class="d-flex" style="min-height: 100vh; background-color: #f4f4f4">
+  <!-- ========== Sidebar Section ========== -->
+  <aside
+    id="sidebar"
+    class="sidebar-custom d-flex flex-column p-4 text-white"
+    [class.show]="isSidebarVisible"
   >
-    Send Money
-  </button>
+    <div class="mb-4">
+      <h3 class="fw-bold mb-0">💼 Innotm</h3>
+      <small class="text-muted" style="color: #ccc">Wallet Dashboard</small>
+    </div>
+
+    <ul class="nav flex-column mt-4 sidebar-links">
+      <li class="nav-item mb-2">
+        <a class="nav-link" (click)="addMoney1()">
+          <i class="bi bi-plus-circle me-2"></i> Add Money
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link" (click)="transferMoney()">
+          <i class="bi bi-cash-coin me-2"></i> Transfer Money
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link" (click)="viewTransactionHistory()">
+          <i class="bi bi-receipt me-2"></i> Transaction History
+        </a>
+      </li>
+      <li class="nav-item mt-auto pt-5">
+        <a class="nav-link text-danger" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-2"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <label for="users" class="select-label"> Select User</label>
+      <select
+        id="users"
+        class="custom-select"
+        [(ngModel)]="transferMoneyModel.receiverPhoneNumber"
+      >
+        <option value="" disabled selected>Select users</option>
+        <option *ngFor="let user of userlist" [value]="user.phoneNumber">
+          {{user.username}} | {{user.phoneNumber}}
+        </option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">Amount</span>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="transferMoneyModel.amount"
+        min="1"
+        aria-label="Amount (to the nearest INR)"
+        required
+      />
+      <span class="input-group-text">.00</span>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="sendMoney()"
+      [disabled]="!transferMoneyModel.receiverPhoneNumber ||!transferMoneyModel.amount"
+    >
+      Send Money
+    </button>
+  </div>
 </div>
