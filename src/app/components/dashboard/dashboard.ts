@@ -33,6 +33,7 @@ export class Dashboard implements OnInit {
     this.router.navigate(['/transactionhistory']);
   }
   logout() {
+    sessionStorage.removeItem('number');
     this.router.navigate(['/login']);
   }
   isSidebarVisible = false;

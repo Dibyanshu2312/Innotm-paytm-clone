@@ -38,6 +38,7 @@ export class Addmoney {
     this.router.navigate(['/transactionhistory']);
   }
   logout() {
+    sessionStorage.removeItem('number');
     this.router.navigate(['/login']);
   }
   isSidebarVisible = false;
