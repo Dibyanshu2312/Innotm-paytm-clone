@@ -1,0 +1,15 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #0f1123; /* Optional dark background */
+}
+
+app-sidebar {
+  width: auto;
+}
+
+.main-content {
+  flex: 2;
+
+  overflow-y: auto;
+}

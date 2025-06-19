@@ -1,18 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Myservice } from '../../services/myservice';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIfContext } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-transaction-history',
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TableModule,
+    TagModule,
+    BadgeModule,
+    ButtonModule,
+  ],
   templateUrl: './transaction-history.html',
   styleUrl: './transaction-history.css',
 })
 export class TransactionHistory implements OnInit {
   transactions: any[] = [];
   username: string = '';
+  noData: TemplateRef<NgIfContext<boolean>> | null | undefined;
 
   constructor(private myservice: Myservice, private router: Router) {}
 

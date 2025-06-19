@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Myservice } from '../../services/myservice';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class Dashboard implements OnInit {
   constructor(private router: Router, private myservice: Myservice) {}
