@@ -1,0 +1,398 @@
+/* You can add global styles to this file, and also import other style files */
+/* ========== MODERN DARK SIDEBAR STYLES ========== */
+
+/* Main Sidebar Container */
+.sidebar-custom,
+#sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #1e1e2e 0%, #2a2a3e 50%, #1a1a2a 100%);
+  border-right: 2px solid rgba(64, 181, 246, 0.2);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4),
+    inset -1px 0 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Animated Background Pattern */
+.sidebar-custom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(64, 181, 246, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(156, 39, 176, 0.03) 0%,
+      transparent 50%
+    );
+  animation: backgroundPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes backgroundPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Sidebar Header Section */
+.sidebar-header {
+  padding: 2.5rem 2rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+}
+
+.sidebar-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #40b5f6, transparent);
+  animation: headerGlow 3s ease-in-out infinite;
+}
+
+@keyframes headerGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleX(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Brand Title */
+.sidebar-header h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #40b5f6 0%, #64b5f6 50%, #90caf9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 20px rgba(64, 181, 246, 0.3);
+  position: relative;
+}
+
+.sidebar-header h3::before {
+  content: "💼";
+  margin-right: 0.5rem;
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px rgba(64, 181, 246, 0.5));
+}
+
+/* Subtitle */
+.sidebar-subtitle {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+}
+
+/* Navigation Links Container */
+.sidebar-links {
+  padding: 2rem 0 1rem;
+  flex-grow: 1;
+}
+
+/* Individual Navigation Items */
+.sidebar-custom .nav-item {
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+/* Navigation Links */
+.sidebar-custom .nav-link {
+  color: #c5c5c5;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1.2rem 2rem;
+  margin: 0 1rem;
+  border-radius: 15px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+}
+
+/* Hover Effect Background */
+.sidebar-custom .nav-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(64, 181, 246, 0.1),
+    rgba(64, 181, 246, 0.2),
+    rgba(64, 181, 246, 0.1),
+    transparent
+  );
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Active State Indicator */
+.sidebar-custom .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(180deg, #40b5f6, #64b5f6);
+  border-radius: 0 4px 4px 0;
+  transform: translateY(-50%);
+  transition: height 0.3s ease;
+}
+
+/* Link Hover States */
+.sidebar-custom .nav-link:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(64, 181, 246, 0.15) 0%,
+    rgba(64, 181, 246, 0.08) 50%,
+    rgba(64, 181, 246, 0.15) 100%
+  );
+  border: 1px solid rgba(64, 181, 246, 0.3);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(64, 181, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-custom .nav-link:hover::before {
+  left: 100%;
+}
+
+.sidebar-custom .nav-link:hover::after {
+  height: 60%;
+}
+
+/* Link Icons */
+.sidebar-custom .nav-link i {
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  width: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.sidebar-custom .nav-link:hover i {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(64, 181, 246, 0.6));
+}
+
+/* Active Link State */
+.sidebar-custom .nav-link.active {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(64, 181, 246, 0.25) 0%,
+    rgba(64, 181, 246, 0.15) 50%,
+    rgba(64, 181, 246, 0.25) 100%
+  );
+  border: 1px solid rgba(64, 181, 246, 0.4);
+  transform: translateX(5px);
+}
+
+.sidebar-custom .nav-link.active::after {
+  height: 80%;
+}
+
+/* Logout Section */
+.logout-link {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Logout Link Special Styling */
+.logout-link .nav-link {
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.logout-link .nav-link:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.2) 0%,
+    rgba(255, 107, 107, 0.1) 50%,
+    rgba(255, 107, 107, 0.2) 100%
+  );
+  border-color: rgba(255, 107, 107, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.logout-link .nav-link::after {
+  background: linear-gradient(180deg, #ff6b6b, #ff5252);
+}
+
+/* Mobile Sidebar Toggle Button */
+.sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1050;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 46, 0.9) 0%,
+    rgba(42, 42, 62, 0.9) 100%
+  );
+  color: #40b5f6;
+  border: 2px solid rgba(64, 181, 246, 0.3);
+  padding: 12px 16px;
+  font-size: 1.6rem;
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+}
+
+.sidebar-toggle:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(64, 181, 246, 0.2) 0%,
+    rgba(64, 181, 246, 0.1) 100%
+  );
+  border-color: rgba(64, 181, 246, 0.5);
+  transform: scale(1.05);
+  color: #ffffff;
+  box-shadow: 0 12px 35px rgba(64, 181, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: block !important;
+  }
+
+  #sidebar,
+  .sidebar-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1040;
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.5),
+      inset -1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  #sidebar.show,
+  .sidebar-custom.show {
+    transform: translateX(0);
+  }
+
+  /* Mobile Overlay */
+  #sidebar.show::before,
+  .sidebar-custom.show::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 300px;
+    width: calc(100vw - 300px);
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar-toggle {
+    display: none !important;
+  }
+
+  #sidebar,
+  .sidebar-custom {
+    width: 280px;
+    position: relative;
+    transform: none;
+  }
+}
+
+/* Scrollbar Styling for Sidebar */
+.sidebar-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-custom::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.sidebar-custom::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(64, 181, 246, 0.6) 0%,
+    rgba(64, 181, 246, 0.3) 100%
+  );
+  border-radius: 3px;
+}
+
+.sidebar-custom::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(64, 181, 246, 0.8) 0%,
+    rgba(64, 181, 246, 0.5) 100%
+  );
+}
+
+/* Additional Animation for Link Text */
+.sidebar-custom .nav-link span {
+  transition: all 0.3s ease;
+}
+
+.sidebar-custom .nav-link:hover span {
+  letter-spacing: 0.5px;
+}
+
+/* Pulse Effect for Active States */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(64, 181, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(64, 181, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(64, 181, 246, 0);
+  }
+}
+
+.sidebar-custom .nav-link.active {
+  animation: pulse 2s infinite;
+}
