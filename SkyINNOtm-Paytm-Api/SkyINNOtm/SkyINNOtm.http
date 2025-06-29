@@ -1,0 +1,6 @@
+@SkyINNOtm_HostAddress = http://localhost:5013
+
+GET {{SkyINNOtm_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
