@@ -7,17 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class Myservice {
   constructor(private http: HttpClient) {}
-  masterapiurl = 'https://skytm-api.azurewebsites.net';
+  masterapiurl = 'https://localhost:7213';
 
   signup(signupInfo: SignupInfo) {
     return this.http.post<any>(
-      this.masterapiurl + '/api/Auth/signup',
+      this.masterapiurl + '/api/Auth/Register',
       signupInfo
     );
   }
   login(loginInfo: LoginInfo) {
     return this.http.post<any>(
-      this.masterapiurl + '/api/Auth/login',
+      this.masterapiurl + '/api/Auth/Login',
       loginInfo
     );
   }
@@ -28,12 +28,12 @@ export class Myservice {
 
   Balanceinfo(phoneNumber: any) {
     return this.http.get<any>(
-      this.masterapiurl + '/api/Users/balance?phoneNumber=' + phoneNumber
+      this.masterapiurl + '/api / Users/balance?phonenumber=' + phoneNumber
     );
   }
   getUserList(): Observable<userlistResponse> {
     return this.http.get<userlistResponse>(
-      this.masterapiurl + '/api/Users/basic-list'
+      this.masterapiurl + '/api / Users/basic-list'
     );
   }
   transferMoney(transferMoney: transferMoneyModel) {
@@ -51,14 +51,16 @@ export class Myservice {
   deleteTransactionById(transactionId: number): Observable<any> {
     return this.http.delete<any>(
       this.masterapiurl +
-        '/api/Transactions/DeleteTransectionById?tid=' +
+        '/api/Transactions/DeleteTransactionById?Tid=' +
         transactionId
     );
   }
 
   deleteAllTransactions(phoneNumber: string): Observable<any> {
     return this.http.delete<any>(
-      this.masterapiurl + '/api/Transactions/history?phoneNumber=' + phoneNumber
+      this.masterapiurl +
+        '/api/Transactions/DeleteHistory?phoneNumber=' +
+        phoneNumber
     );
   }
 }

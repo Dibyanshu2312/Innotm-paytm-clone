@@ -1,27 +1,48 @@
-<div class="container mt-5">
-  <div class="card shadow-sm p-4">
-    <h3 class="mb-4 text-primary text-center">Add Money to Your Wallet</h3>
+<div class="wallet-container container mt-5">
+  <!-- Wallet Balance -->
+  <section
+    class="balance-section shadow-sm mb-4 d-flex justify-content-between align-items-center px-4 py-3"
+  >
+    <div>
+      <h6 class="text-muted mb-1">Wallet Balance</h6>
+      <h2 class="text-success fw-bold mb-0">₹ {{ balance }}</h2>
+    </div>
+    <i class="bi bi-wallet2 fs-1 text-success opacity-50"></i>
+  </section>
 
-    <form (ngSubmit)="addMoney()" #addMoneyForm="ngForm">
-      <div class="mb-3">
-        <label for="amount" class="form-label">Amount</label>
+  <!-- Add Money Card -->
+  <div class="card wallet-card p-4 shadow">
+    <h3 class="mb-4 text-center fw-semibold text-primary">
+      <i class="bi bi-plus-circle-fill me-2"></i>Add Money to Wallet
+    </h3>
+
+    <form (ngSubmit)="addMoney()" #addMoneyForm="ngForm" novalidate>
+      <div class="form-floating mb-4">
         <input
           type="number"
           id="amount"
           name="amount"
           class="form-control"
+          placeholder="Enter amount"
           required
           min="1"
           [(ngModel)]="addMoneyModel.amount"
           #amountRef="ngModel"
         />
-        <div *ngIf="amountRef.invalid && amountRef.touched" class="text-danger">
+        <label for="amount">Amount (₹)</label>
+        <div
+          *ngIf="amountRef.invalid && amountRef.touched"
+          class="text-danger mt-1 small"
+        >
           Please enter a valid amount.
         </div>
       </div>
 
-      <button class="btn btn-success w-100" [disabled]="addMoneyForm.invalid">
-        Add Money
+      <button
+        class="btn btn-lg btn-gradient w-100 fw-semibold"
+        [disabled]="addMoneyForm.invalid"
+      >
+        <i class="bi bi-cash-stack me-2"></i>Add Money
       </button>
     </form>
   </div>

@@ -13,11 +13,18 @@ import { Router, RouterModule } from '@angular/router';
 export class Addmoney {
   userphoneNumber: any;
   addMoneyModel = new AddMoneyInfo();
+  balance: any;
 
   constructor(private myservice: Myservice, private router: Router) {}
 
   ngOnInit() {
     this.userphoneNumber = sessionStorage.getItem('number');
+    const phoneNumber = sessionStorage.getItem('number');
+    if (phoneNumber) {
+      this.myservice.Balanceinfo(phoneNumber).subscribe((data) => {
+        this.balance = data.result.amount; // Correctly extract amount from result
+      });
+    }
   }
 
   addMoney() {

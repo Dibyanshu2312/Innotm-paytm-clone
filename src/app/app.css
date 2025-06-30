@@ -1,15 +1,24 @@
 .app-container {
   display: flex;
-  min-height: 100vh;
-  background-color: #0f1123; /* Optional dark background */
+  height: 100vh; /* Full screen height */
+  overflow: hidden;
 }
 
 app-sidebar {
-  width: auto;
+  width: 230px; /* Adjust as needed */
+  /* Dark sidebar (optional) */
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .main-content {
-  flex: 2;
-
+  flex: 1;
   overflow-y: auto;
+
+  background-color: #eef3f8; /* Soft banking blue-gray */
+  min-height: 100vh; /* Ensure it takes full height */
 }

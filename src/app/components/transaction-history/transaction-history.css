@@ -1,0 +1,15 @@
+.bg-dark {
+  background-color: #18181b !important;
+}
+
+.text-white {
+  color: #f8f9fa !important;
+}
+
+.p-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.transaction-container {
+  padding: 55 rem;
+}

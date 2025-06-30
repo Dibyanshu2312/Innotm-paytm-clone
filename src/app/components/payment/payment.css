@@ -1,111 +1,49 @@
-/* Simple Money Transfer Form Styles */
-.card-body {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 10px;
-  padding: 2rem;
-  max-width: 400px;
-  margin: 1rem auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.wallet-transfer-card {
+  max-width: 500px;
+  margin: auto;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
-.input-group {
-  margin-bottom: 1.5rem !important;
-}
-
-.select-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #495057;
-  font-size: 0.9rem;
-}
-
-.custom-select {
-  width: 100%;
+/* Select input */
+select.form-select {
   padding: 0.75rem;
-  border: 2px solid #ced4da;
+  font-size: 1rem;
   border-radius: 8px;
-  background: white;
-  font-size: 1rem;
-  color: #495057;
-  transition: border-color 0.3s ease;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
 }
 
-.custom-select:focus {
-  outline: none;
-  border-color: #007bff;
+select.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
 }
 
-.custom-select:hover {
-  border-color: #adb5bd;
-}
-
-.input-group-text {
-  background: #e9ecef;
-  border: 2px solid #ced4da;
-  color: #495057;
-  font-weight: 600;
-  padding: 0.75rem 1rem;
-}
-
-.input-group-text:first-child {
-  border-radius: 8px 0 0 8px;
-  border-right: none;
-}
-
-.input-group-text:last-child {
+/* Input group */
+.input-group .form-control {
   border-radius: 0 8px 8px 0;
-  border-left: none;
 }
 
-.form-control {
-  border: 2px solid #ced4da;
-  border-left: none;
-  border-right: none;
+.input-group .input-group-text {
+  border-radius: 8px 0 0 8px;
+  font-weight: 500;
+}
+
+/* Send Button */
+.btn-transfer {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
   padding: 0.75rem;
   font-size: 1rem;
-  color: #495057;
-  transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: none;
-}
-
-.input-group:focus-within .input-group-text,
-.input-group:focus-within .form-control {
-  border-color: #007bff;
-}
-
-.btn-primary {
-  background: #007bff;
+  font-weight: 600;
   border: none;
   border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  width: 100%;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-  background: #0056b3;
-}
-
-.btn-primary:disabled {
-  background: #6c757d;
-  cursor: not-allowed;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .card-body {
-    margin: 0.5rem;
-    padding: 1.5rem;
-  }
+.btn-transfer:hover {
+  background: linear-gradient(to right, #00f2fe, #4facfe);
+  box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
+  transform: translateY(-1px);
 }

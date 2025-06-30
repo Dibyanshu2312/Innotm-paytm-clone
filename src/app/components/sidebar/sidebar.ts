@@ -26,9 +26,17 @@ export class Sidebar {
   }
   isSidebarVisible = false;
 
+  showSidebar = false;
+
   toggleSidebar() {
-    this.isSidebarVisible = !this.isSidebarVisible;
+    this.showSidebar = !this.showSidebar;
+
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('show', this.showSidebar);
+    }
   }
+
   goHome() {
     this.router.navigate(['/dashboard']);
   }

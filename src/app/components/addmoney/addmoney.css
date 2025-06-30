@@ -1,0 +1,62 @@
+/* Main container */
+.container {
+  max-width: 500px;
+  margin: 2 rem;
+}
+
+/* Balance Section */
+.balance-section {
+  background-color: #e8f5e9;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 5px solid #28a745;
+  margin-bottom: 2rem;
+}
+
+/* Card styling */
+.card {
+  border: none;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Heading */
+.card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Input styling */
+.form-control {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+/* Validation message */
+.text-danger {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+.custom-btn-add-money {
+  background-color: #28a745;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.custom-btn-add-money:hover {
+  background-color: #218838;
+}
