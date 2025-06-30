@@ -124,4 +124,67 @@ export class TransactionHistory implements OnInit {
   goHome() {
     this.router.navigate(['/dashboard']);
   }
+
+  currentPage = 1;
+  rowsPerPage = 5;
+  paginatedTransactions: any[] = [];
+  totalPages = 0;
+
+  // Update pagination when transactions change
+  updatePagination() {
+    this.totalPages = Math.ceil(this.transactions.length / this.rowsPerPage);
+    const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+    const endIndex = startIndex + this.rowsPerPage;
+    this.paginatedTransactions = this.transactions.slice(startIndex, endIndex);
+  }
+
+  // Pagination methods
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePagination();
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
+
+  goToFirstPage() {
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  goToLastPage() {
+    this.currentPage = this.totalPages;
+    this.updatePagination();
+  }
+
+  updateRowsPerPage() {
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  getCurrentPageStart() {
+    return (this.currentPage - 1) * this.rowsPerPage;
+  }
+
+  getVisiblePages() {
+    const pages = [];
+    const start = Math.max(1, this.currentPage - 2);
+    const end = Math.min(this.totalPages, this.currentPage + 2);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
 }

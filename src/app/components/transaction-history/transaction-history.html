@@ -1,103 +1,148 @@
 <div class="transaction-container">
-  <main class="p-3 p-md-4 bg-dark text-white flex-fill">
-    <div class="container-fluid">
+  <main class="transaction-main">
+    <div class="container">
       <!-- Header -->
-      <div
-        class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"
-      >
-        <h2 class="mb-0 fs-4">Transaction History</h2>
-        <div class="d-flex gap-2">
-          <button
-            pButton
-            label="Refresh"
-            icon="pi pi-refresh"
-            class="p-button-sm p-button-primary"
-            (click)="getTransactions()"
-          ></button>
-          <button
-            pButton
-            label="Delete All"
-            icon="pi pi-trash"
-            class="p-button-sm p-button-danger"
-            (click)="deleteAllTransactions()"
-          ></button>
+      <div class="header-section">
+        <h2 class="page-title">Transaction History</h2>
+        <div class="header-buttons">
+          <button class="btn btn-primary" (click)="getTransactions()">
+            <i class="refresh-icon">🔄</i>
+            Refresh
+          </button>
+          <button class="btn btn-danger" (click)="deleteAllTransactions()">
+            <i class="trash-icon">🗑️</i>
+            Delete All
+          </button>
         </div>
       </div>
 
-      <!-- Table -->
-      <p-table
-        [value]="transactions"
-        [paginator]="true"
-        [rows]="5"
-        [rowsPerPageOptions]="[5,10,20]"
-        responsiveLayout="scroll"
-        [tableStyle]="{ 'min-width': '60rem' }"
-      >
-        <!-- Header -->
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Seial number</th>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Action</th>
-          </tr>
-        </ng-template>
+      <!-- Table Container -->
+      <div class="table-wrapper">
+        <table
+          class="fancy-table"
+          *ngIf="transactions && transactions.length > 0"
+        >
+          <thead>
+            <tr>
+              <th>Serial Number</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let txn of paginatedTransactions; let i = index"
+              class="table-row"
+            >
+              <td>
+                <div class="serial-number">
+                  {{ getCurrentPageStart() + i + 1 }}
+                </div>
+              </td>
+              <td class="date-cell">
+                {{ txn.transactionDate | date: 'dd/MM/yyyy, hh:mm a' }}
+              </td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="txn.transactionType === 'credit' ? 'badge-received' : 'badge-sent'"
+                >
+                  {{ txn.transactionType === 'credit' ? 'Received' : 'Sent' }}
+                </span>
+              </td>
+              <td>
+                <span
+                  class="amount"
+                  [ngClass]="txn.transactionType === 'credit' ? 'amount-positive' : 'amount-negative'"
+                >
+                  {{ txn.transactionType === 'credit' ? '+' : '-' }}₹ {{
+                  txn.transferAmount | number: '1.2-2' }}
+                </span>
+              </td>
+              <td class="name-cell">{{ txn.receiverName || 'Unknown' }}</td>
+              <td>
+                <span class="phone-tag"
+                  >{{ txn.receiverPhoneNumber || 'N/A' }}</span
+                >
+              </td>
+              <td>
+                <button
+                  class="delete-btn"
+                  (click)="deleteTransaction(txn.transactionId)"
+                >
+                  🗑️ Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <!-- Body -->
-        <ng-template pTemplate="body" let-txn let-i="rowIndex">
-          <tr>
-            <td>{{ i + 1 }}</td>
-            <td>{{ txn.transactionDate | date: 'dd/MM/yyyy, hh:mm a' }}</td>
-            <td>
-              <p-badge
-                [value]="txn.transactionType === 'credit' ? 'Received' : 'Sent'"
-                [severity]="txn.transactionType === 'credit' ? 'success' : 'danger'"
-              ></p-badge>
-            </td>
-            <td>
-              <span
-                [ngClass]="{
-                'text-success': txn.transactionType === 'credit',
-                'text-danger': txn.transactionType === 'debit',
-                'fw-bold': true
-              }"
-              >
-                {{ txn.transactionType === 'credit' ? '+' : '-' }}₹ {{
-                txn.transferAmount | number: '1.2-2' }}
-              </span>
-            </td>
-            <td>{{ txn.receiverName || 'Unknown' }}</td>
-            <td>
-              <p-tag
-                [value]="txn.receiverPhoneNumber || 'N/A'"
-                severity="info"
-              ></p-tag>
-            </td>
-            <td>
-              <button
-                pButton
-                icon="pi pi-trash"
-                class="p-button-sm p-button-danger p-button-rounded"
-                (click)="deleteTransaction(txn.transactionId)"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </ng-template>
+        <!-- Empty State -->
+        <div
+          class="empty-state"
+          *ngIf="!transactions || transactions.length === 0"
+        >
+          <div class="empty-icon">📊</div>
+          <h3>No transactions found</h3>
+          <p>Your transaction history will appear here</p>
+        </div>
 
-        <!-- Empty -->
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="7" class="text-center text-muted">
-              No transactions found.
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+        <!-- Pagination -->
+        <div class="pagination" *ngIf="transactions && transactions.length > 0">
+          <button
+            class="page-btn"
+            (click)="goToFirstPage()"
+            [disabled]="currentPage === 1"
+          >
+            ‹‹
+          </button>
+          <button
+            class="page-btn"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            ‹
+          </button>
+
+          <button
+            *ngFor="let page of getVisiblePages()"
+            class="page-btn"
+            [ngClass]="{'active': page === currentPage}"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+
+          <button
+            class="page-btn"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            ›
+          </button>
+          <button
+            class="page-btn"
+            (click)="goToLastPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            ››
+          </button>
+
+          <select
+            class="rows-select"
+            [(ngModel)]="rowsPerPage"
+            (change)="updateRowsPerPage()"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+      </div>
     </div>
   </main>
 </div>
