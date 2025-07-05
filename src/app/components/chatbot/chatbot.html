@@ -1,0 +1,45 @@
+<div class="chat-launcher">
+  <button class="chat-toggle-btn" (click)="toggleChat()">
+    {{ isOpen ? 'Close Chat' : 'Open Chat' }}
+  </button>
+
+  <div *ngIf="isOpen" class="chatbox">
+    <h2>🤖 Wallet Assistant</h2>
+
+    <p class="info">
+      Ask anything in <strong>Hindi</strong> or <strong>English</strong>.
+    </p>
+
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="loading" class="info">Thinking...</div>
+
+    <div class="messages">
+      <div *ngIf="question"><strong>You:</strong> {{ question }}</div>
+      <div *ngIf="reply"><strong>Bot:</strong> {{ reply }}</div>
+    </div>
+
+    <div class="input-group">
+      <input
+        [(ngModel)]="question"
+        type="text"
+        placeholder="Type your question..."
+      />
+      <button class="ask-btn" (click)="askQuestion()">Ask</button>
+    </div>
+
+    <button
+      class="voice-btn"
+      (click)="startVoiceRecognition()"
+      [disabled]="isListening"
+    >
+      🎤 {{ isListening ? 'Listening...' : 'Speak your question' }}
+    </button>
+
+    <div *ngIf="userBalance" class="info">
+      💰 <strong>Balance:</strong> {{ userBalance }}
+    </div>
+    <div *ngIf="transactionCompleted" class="success">
+      ✅ Transaction Completed
+    </div>
+  </div>
+</div>

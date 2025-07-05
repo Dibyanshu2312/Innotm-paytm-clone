@@ -2,10 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Myservice } from '../../services/myservice';
 import { CommonModule } from '@angular/common';
+import { Chatbot } from '../chatbot/chatbot';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule, Chatbot],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   encapsulation: ViewEncapsulation.None,

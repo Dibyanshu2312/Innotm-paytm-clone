@@ -10,6 +10,7 @@ import { Login } from './components/login/login';
 import { Signup } from './components/signup/signup';
 import { Component } from '@angular/core';
 import { Sidebar } from './components/sidebar/sidebar';
+import { Chatbot } from './components/chatbot/chatbot';
 
 @Component({
   selector: 'app-root',
