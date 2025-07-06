@@ -1,81 +1,76 @@
-/* Main layout spacing */
-.main-content {
-  padding: 2rem;
-  background-color: #f8f9fa; /* Light gray background */
-  min-height: 100vh;
-  margin: 2rem;
+/* Background and Gradient Header */
+.dashboard-bg {
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
 }
 
-/* Card Styling */
-.welcome-card {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+.ribbon-header {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
 }
 
-/* Headings */
-.welcome-card h2 {
-  font-size: 2rem;
-  color: #004085; /* Deep blue */
+.text-highlight {
+  color: #ffd93d;
+}
+
+.card-glow {
+  background: linear-gradient(135deg, #1f4037, #99f2c8);
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(50, 205, 50, 0.3);
+  color: white;
+}
+
+.balance-glow {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 0 0 15px #aaffaa;
+}
+
+/* Gradient Buttons with Neon Glow */
+.neon-green {
+  background: linear-gradient(135deg, #00ff87, #60efff);
+  color: black;
+  border: none;
   font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0, 255, 135, 0.4);
+  transition: all 0.3s ease;
+}
+.neon-green:hover {
+  transform: scale(1.05);
 }
 
-.welcome-card p {
-  font-size: 1rem;
-  color: #6c757d;
+.neon-blue {
+  background: linear-gradient(135deg, #3a8eff, #b2fefa);
+  color: black;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(58, 142, 255, 0.4);
+  transition: all 0.3s ease;
+}
+.neon-blue:hover {
+  transform: scale(1.05);
 }
 
-/* Button styling */
-.action-buttons button {
-  font-size: 1.1rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
+.neon-purple {
+  background: linear-gradient(135deg, #c471ed, #f64f59);
+  color: white;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(246, 79, 89, 0.4);
+  transition: all 0.3s ease;
+}
+.neon-purple:hover {
+  transform: scale(1.05);
 }
 
-.action-buttons button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+/* Chatbot Style */
+.chat-floating {
+  width: 320px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Balance Widget */
-.balance-widget {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  justify-content: space-between;
-}
-
-.balance-widget h6 {
-  font-size: 1rem;
-  color: #6c757d;
-}
-
-.balance-widget h3 {
-  font-size: 2rem;
-  color: #28a745; /* Bootstrap success green */
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .action-buttons .col-md-4 {
-    width: 100%;
-  }
-
-  .balance-widget {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-.balance-section {
-  background-color: #e8f5e9;
-  padding: 1.5rem;
+/* Optional: Table Enhancements */
+table {
   border-radius: 12px;
-  border-left: 5px solid #28a745;
-  margin-bottom: 2rem;
+  overflow: hidden;
 }

@@ -6,12 +6,10 @@
         <h2 class="page-title">Transaction History</h2>
         <div class="header-buttons">
           <button class="btn btn-primary" (click)="getTransactions()">
-            <i class="refresh-icon">🔄</i>
-            Refresh
+            <i class="refresh-icon">🔄</i> Refresh
           </button>
           <button class="btn btn-danger" (click)="deleteAllTransactions()">
-            <i class="trash-icon">🗑️</i>
-            Delete All
+            <i class="trash-icon">🗑️</i> Delete All
           </button>
         </div>
       </div>
@@ -49,7 +47,11 @@
               <td>
                 <span
                   class="badge"
-                  [ngClass]="txn.transactionType === 'credit' ? 'badge-received' : 'badge-sent'"
+                  [ngClass]="{
+                    'badge-received': txn.transactionType === 'credit',
+                    'badge-sent': txn.transactionType !== 'credit'
+                  }"
+                  [title]="txn.transactionType === 'credit' ? 'Received' : 'Sent'"
                 >
                   {{ txn.transactionType === 'credit' ? 'Received' : 'Sent' }}
                 </span>
@@ -57,9 +59,12 @@
               <td>
                 <span
                   class="amount"
-                  [ngClass]="txn.transactionType === 'credit' ? 'amount-positive' : 'amount-negative'"
+                  [ngClass]="{
+                    'amount-positive': txn.transactionType === 'credit',
+                    'amount-negative': txn.transactionType !== 'credit'
+                  }"
                 >
-                  {{ txn.transactionType === 'credit' ? '+' : '-' }}₹ {{
+                  {{ txn.transactionType === 'credit' ? '+' : '-' }}₹{{
                   txn.transferAmount | number: '1.2-2' }}
                 </span>
               </td>
@@ -111,7 +116,7 @@
           <button
             *ngFor="let page of getVisiblePages()"
             class="page-btn"
-            [ngClass]="{'active': page === currentPage}"
+            [ngClass]="{ 'active': page === currentPage }"
             (click)="goToPage(page)"
           >
             {{ page }}

@@ -14,13 +14,14 @@ import { Chatbot } from './components/chatbot/chatbot';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, RouterModule, Sidebar],
+  imports: [RouterOutlet, CommonModule, RouterModule, Sidebar, Login, Chatbot],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected title = 'money-wallet-project';
   showSidebar = true;
+  isloggedin = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -29,5 +30,14 @@ export class App {
         this.showSidebar = !hideOnRoutes.includes(event.urlAfterRedirects);
       }
     });
+
+    const number = sessionStorage.getItem('number');
+    if (number) {
+      this.isloggedin = true;
+    }
+  }
+
+  received(event: boolean) {
+    this.isloggedin = event;
   }
 }

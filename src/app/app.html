@@ -1,7 +1,10 @@
-<div class="app-container">
-  <app-sidebar *ngIf="showSidebar"></app-sidebar>
+<app-login *ngIf="!isloggedin" (loginEvent)="received($event)"></app-login>
+
+<div class="app-container" *ngIf="isloggedin">
+  <app-sidebar></app-sidebar>
 
   <main class="main-content">
     <router-outlet></router-outlet>
+    <app-chatbot />
   </main>
 </div>

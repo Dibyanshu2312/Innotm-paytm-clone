@@ -48,9 +48,9 @@ export class TransactionHistory implements OnInit {
 
         if (Array.isArray(data)) {
           this.transactions = data;
-        } else if (data && data.result && Array.isArray(data.result)) {
+        } else if (data?.result && Array.isArray(data.result)) {
           this.transactions = data.result;
-        } else if (data && data.data && Array.isArray(data.data)) {
+        } else if (data?.data && Array.isArray(data.data)) {
           this.transactions = data.data;
         } else if (data) {
           this.transactions = [data];
@@ -59,6 +59,7 @@ export class TransactionHistory implements OnInit {
         }
 
         console.log('Processed transactions:', this.transactions);
+        this.updatePagination(); // ✅ Important
       },
       error: (error: any) => {
         console.error('Error loading transactions:', error);

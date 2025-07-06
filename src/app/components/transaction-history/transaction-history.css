@@ -3,7 +3,6 @@
   font-family: Arial, sans-serif;
   min-height: 100vh;
   background-color: #f4f4f4;
-  padding: 20px;
 }
 
 .transaction-main {
@@ -69,6 +68,10 @@
 .table-wrapper {
   margin-top: 20px;
   overflow-x: auto;
+  box-shadow: 3px 2px 3px 3px rgba(0, 0, 0, 0.292);
+  border-radius: 8px;
+
+  padding: 8px;
 }
 
 table {
@@ -244,4 +247,27 @@ tr:hover {
   .pagination {
     justify-content: center;
   }
+}
+.amount-positive {
+  color: green;
+  font-weight: 600;
+}
+
+.amount-negative {
+  color: red;
+  font-weight: 600;
+}
+
+.badge-received {
+  background-color: #28a745;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.badge-sent {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 10px;
 }

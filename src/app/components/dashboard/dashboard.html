@@ -1,45 +1,71 @@
-<main class="main-content-banking flex-grow-1">
+<main class="bg-light p-3 min-vh-100 py-4">
   <div class="container-fluid">
-    <div><app-chatbot /></div>
-    <!-- Balance Section -->
-    <section
-      class="balance-section shadow-sm mb-4 d-flex justify-content-between align-items-center px-4 py-3"
-    >
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
-        <h6 class="text-muted mb-1">Wallet Balance</h6>
-        <h2 class="text-success fw-bold mb-0">₹ {{ balance }}</h2>
+        <h4 class="fw-bold mb-0">Welcome back</h4>
+        <small class="text-muted"
+          >Here’s a quick overview of your account activity.</small
+        >
       </div>
-      <i class="bi bi-wallet2 fs-1 text-success opacity-50"></i>
-    </section>
+      <span class="badge bg-primary fs-6 py-2 px-3">
+        {{ todayDate | date: 'fullDate' }}
+      </span>
+    </div>
 
-    <!-- Welcome and Actions -->
-    <section class="welcome-card shadow">
-      <h2 class="mb-3">Welcome to Innotm</h2>
-      <p class="mb-4">What would you like to do today?</p>
-
-      <div class="row g-3">
-        <div class="col-md-4">
-          <button class="btn btn-outline-success w-100" (click)="addMoney()">
-            ➕ Add Money
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button
-            class="btn btn-outline-primary w-100"
-            (click)="transferMoney()"
-          >
-            💸 Transfer Money
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button
-            class="btn btn-outline-secondary w-100"
-            (click)="viewTransactionHistory()"
-          >
-            📄 Transactions
-          </button>
+    <!-- Balance + Actions -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div
+          class="card shadow-sm p-4 h-100"
+          style="
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: white;
+          "
+        >
+          <h6 class="text-uppercase fw-semibold mb-1">Account Balance</h6>
+          <h2 class="fw-bold">₹ {{ balance }}</h2>
+          <small>Total amount available</small>
         </div>
       </div>
-    </section>
+
+      <div class="col-md-3">
+        <div class="card shadow-sm p-4 bg-warning text-dark h-100">
+          <h6 class="text-uppercase fw-semibold mb-2">Send Money</h6>
+          <p class="mb-1">Transfer funds quickly and securely</p>
+          <button class="btn btn-dark btn-sm mt-2" (click)="transferMoney()">
+            Send →
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card shadow-sm p-4 bg-info text-white h-100">
+          <h6 class="text-uppercase fw-semibold mb-2">Add Money</h6>
+          <p class="mb-1">Top up your wallet instantly</p>
+          <button class="btn btn-light btn-sm mt-2" (click)="addMoney()">
+            Add +
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transactions -->
+    <div class="card shadow-sm p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Transactions</h5>
+        <button
+          class="btn btn-outline-secondary btn-sm"
+          (click)="viewTransactionHistory()"
+        >
+          View All
+        </button>
+      </div>
+
+      <app-transaction-history></app-transaction-history>
+    </div>
+
+    <!-- Chatbot (bottom right corner) -->
+    <div class="position-fixed bottom-0 end-0 p-3 z-3"></div>
   </div>
 </main>

@@ -1,17 +1,19 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Myservice } from '../../services/myservice';
+import { Myservice, transferMoneyModel } from '../../services/myservice';
 import { CommonModule } from '@angular/common';
 import { Chatbot } from '../chatbot/chatbot';
+import { TransactionHistory } from '../transaction-history/transaction-history';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, Chatbot],
+  imports: [CommonModule, Chatbot, TransactionHistory],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   encapsulation: ViewEncapsulation.None,
 })
 export class Dashboard implements OnInit {
+  todayDate: Date = new Date();
   constructor(private router: Router, private myservice: Myservice) {}
   balance: number = 0;
 
