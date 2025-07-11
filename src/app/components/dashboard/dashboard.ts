@@ -7,7 +7,7 @@ import { TransactionHistory } from '../transaction-history/transaction-history';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, Chatbot, TransactionHistory],
+  imports: [CommonModule, TransactionHistory],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   encapsulation: ViewEncapsulation.None,
