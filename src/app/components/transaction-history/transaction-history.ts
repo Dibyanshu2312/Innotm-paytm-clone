@@ -23,13 +23,23 @@ import { ButtonModule } from 'primeng/button';
 })
 export class TransactionHistory implements OnInit {
   transactions: any[] = [];
+  paginatedTransactions: any[] = [];
   username: string = '';
-  noData: TemplateRef<NgIfContext<boolean>> | null | undefined;
+  userId: number = 0;
+
+  // Sidebar toggle
+  isSidebarVisible = false;
+
+  // Pagination
+  currentPage = 1;
+  rowsPerPage = 5;
+  totalPages = 0;
 
   constructor(private myservice: Myservice, private router: Router) {}
 
   ngOnInit() {
     this.username = sessionStorage.getItem('number') || '';
+    this.userId = Number(sessionStorage.getItem('userId')) || 0; // ✅ userId is important
     console.log('Phone number from session:', this.username);
     this.getTransactions();
   }
@@ -103,6 +113,26 @@ export class TransactionHistory implements OnInit {
       });
     }
   }
+
+  // Abstract name display
+  getDisplayName(txn: any): string {
+    return txn.receiverName || 'Unknown';
+  }
+
+  // Abstract phone display
+  getDisplayPhone(txn: any): string {
+    return txn.receiverPhoneNumber || 'N/A';
+  }
+
+  // Sidebar and navigation
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
+  }
+
+  goHome() {
+    this.router.navigate(['/dashboard']);
+  }
+
   addMoney1() {
     this.router.navigate(['/addmoney']);
   }
@@ -110,28 +140,18 @@ export class TransactionHistory implements OnInit {
   transferMoney() {
     this.router.navigate(['/payment']);
   }
+
   viewTransactionHistory() {
     this.router.navigate(['/transactionhistory']);
   }
+
   logout() {
     sessionStorage.removeItem('number');
+    sessionStorage.removeItem('userId');
     this.router.navigate(['/login']);
   }
-  isSidebarVisible = false;
 
-  toggleSidebar() {
-    this.isSidebarVisible = !this.isSidebarVisible;
-  }
-  goHome() {
-    this.router.navigate(['/dashboard']);
-  }
-
-  currentPage = 1;
-  rowsPerPage = 5;
-  paginatedTransactions: any[] = [];
-  totalPages = 0;
-
-  // Update pagination when transactions change
+  // Pagination logic
   updatePagination() {
     this.totalPages = Math.ceil(this.transactions.length / this.rowsPerPage);
     const startIndex = (this.currentPage - 1) * this.rowsPerPage;
@@ -139,7 +159,6 @@ export class TransactionHistory implements OnInit {
     this.paginatedTransactions = this.transactions.slice(startIndex, endIndex);
   }
 
-  // Pagination methods
   goToPage(page: number) {
     this.currentPage = page;
     this.updatePagination();

@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Myservice {
+  getTransactions(phoneNumber: any) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) {}
   masterapiurl = 'https://localhost:7213';
 

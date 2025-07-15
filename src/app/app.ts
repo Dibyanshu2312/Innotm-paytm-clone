@@ -20,14 +20,21 @@ import { Chatbot } from './components/chatbot/chatbot';
 })
 export class App {
   protected title = 'money-wallet-project';
-  showSidebar = true;
   isloggedin = false;
+  showSidebar = false;
+  showLoginPage = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        const currentUrl = event.urlAfterRedirects;
+
+        // Show login page only for /login
+        this.showLoginPage = currentUrl === '/login';
+
+        // Show sidebar only when logged in and not on login/signup
         const hideOnRoutes = ['/login', '/signup'];
-        this.showSidebar = !hideOnRoutes.includes(event.urlAfterRedirects);
+        this.showSidebar = !hideOnRoutes.includes(currentUrl);
       }
     });
 
